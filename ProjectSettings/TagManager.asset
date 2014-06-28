@@ -12,11 +12,11 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
-  User Layer 10: 
-  User Layer 11: 
-  User Layer 12: 
+  User Layer 8: Claws
+  User Layer 9: Body
+  User Layer 10: Leg1
+  User Layer 11: Leg2
+  User Layer 12: Leg3
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 
@@ -40,4 +40,24 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: Leg3
+    userID: 5
+    uniqueID: 2294436899
+    locked: 0
+  - name: Leg2
+    userID: 4
+    uniqueID: 3939100187
+    locked: 0
+  - name: Leg1
+    userID: 3
+    uniqueID: 2463504323
+    locked: 0
+  - name: Body
+    userID: 2
+    uniqueID: 624886567
+    locked: 0
+  - name: Claws
+    userID: 1
+    uniqueID: 2887868551
     locked: 0
