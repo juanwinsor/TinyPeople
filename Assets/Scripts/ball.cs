@@ -5,8 +5,7 @@ public class ball : MonoBehaviour {
 
 	// Apply these forces to ball
 	[SerializeField] private Vector3 kickForce;
-
-
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,12 +17,15 @@ public class ball : MonoBehaviour {
 
 		//rigidbody.AddForce (0, 0, 150);
 		rigidbody.AddForce (kickForce);
+
+		// ball lives for x ammount of time
+		Object.Destroy(gameObject, 10);
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-
+		
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -34,5 +36,10 @@ public class ball : MonoBehaviour {
 			//Application.LoadLevel ("WaterJumperOver");
 			Debug.Log ("YOU SCORED");
 		}
+	}
+
+	void OnDisable()
+	{
+		Debug.Log ("BALL DESTROYED");
 	}
 }
