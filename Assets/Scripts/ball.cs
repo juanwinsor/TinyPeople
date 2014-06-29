@@ -2,24 +2,14 @@
 using System.Collections;
 
 public class ball : MonoBehaviour {
-
-	// Apply these forces to ball
-	[SerializeField] private Vector3 kickForce;
+	
+	private Vector3 targetForBall; // used to set direction
+	private Vector3 kickForce; // apply force
 	
 	// Use this for initialization
 	void Start () 
 	{
-		// Create Random Vars
-		kickForce.x = Random.Range (-100, 100);
-		kickForce.y = Random.Range ( 100, 400);
-		kickForce.z = Random.Range ( 400, 600);
-		//print (kickForce);
 
-		//rigidbody.AddForce (0, 0, 150);
-		rigidbody.AddForce (kickForce);
-
-		// ball lives for x ammount of time
-		Object.Destroy(gameObject, 10);
 	}
 
 	// Update is called once per frame
@@ -41,5 +31,22 @@ public class ball : MonoBehaviour {
 	void OnDisable()
 	{
 		//print("BALL DESTROYED");
+	}
+
+	public void SetTarget(Vector3 theTarget)
+	{
+		// Point Ball at Target
+		gameObject.transform.LookAt (theTarget, Vector3.up);
+
+		// Create Random Vars
+		//kickForce.x = Random.Range (-100, 100); // LEFT-RIGHT FORCE
+		kickForce.y = Random.Range ( 300, 400); // FORWARD FORCE
+		//kickForce.z = Random.Range ( 100, 200); // UP FORCE
+
+		//rigidbody.AddForce (0, 0, 150);
+		rigidbody.AddForce (kickForce);
+		
+		// ball lives for x ammount of time
+		Object.Destroy(gameObject, 10);
 	}
 }

@@ -3,9 +3,8 @@ using System.Collections;
 
 public class movingTarget : MonoBehaviour {
 
-	private Bounds m_NetBounds;
 	private int m_Timer = 0;
-	//private int Axis = 0;
+	private Bounds m_NetBounds;
 	private Vector3 m_TargetPosition;
 
 	// Use this for initialization
