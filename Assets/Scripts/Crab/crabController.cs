@@ -3,6 +3,7 @@ using System.Collections;
 
 public class crabController : MonoBehaviour {
 
+	GameObject parentObject;
 
 	private Animator animator;
 
@@ -20,10 +21,14 @@ public class crabController : MonoBehaviour {
 
 	const int constantVelocity = 3;
 
+
+
 	// Use this for initialization
 	void Start () 
 	{
 		animator = GetComponent<Animator>();
+
+		parentObject = transform.parent.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -108,8 +113,28 @@ public class crabController : MonoBehaviour {
 		setVelocity( velocity );
 
 
+		parentObject.rigidbody.velocity = new Vector3( velocity, 0, 0 );
+		parentObject.rigidbody.AddForce( velocity, 0, 0, ForceMode.VelocityChange );
 
+		 
 		Debug.Log( "velocity: " + velocity );
+
+
+		//-- check if jump button was pressed
+		if( Input.GetKeyDown( KeyCode.Space ) )
+		{
+			parentObject.rigidbody.AddForce( 0, 100.0f, 0, ForceMode.Force );
+			setJump();
+		}
+
+
+		//-- check if crab is on ground again after jump
+		if( Physics.Raycast (transform.position, Vector3.down, 1.0f , -1 ) )
+		//if( GetComponent<CharacterController>().isGrounded )
+		{
+			setJumpFinished();
+		}
+						
 
 	}
 
@@ -118,6 +143,22 @@ public class crabController : MonoBehaviour {
 		if( animator )
 		{
 			animator.SetFloat( "velocity", velocity );
+		}
+	}
+
+	void setJump()
+	{
+		if( animator )
+		{
+			animator.SetTrigger( "jump" );
+		}
+	}
+
+	void setJumpFinished()
+	{
+		if( animator )
+		{
+			animator.SetTrigger( "jumpFinished" );
 		}
 	}
 }
