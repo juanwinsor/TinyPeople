@@ -33,7 +33,7 @@ public class ballSpawner : MonoBehaviour {
 			m_ShootTimer = 0;
 			m_LaunchPosition.x = Random.Range(m_FieldBounds.min.x, m_FieldBounds.max.x); // left right
 			m_LaunchPosition.y = 1;
-			m_LaunchPosition.z = Random.Range(m_FieldBounds.min.z, m_FieldBounds.max.z); // forward backward
+			m_LaunchPosition.z = Random.Range(m_FieldBounds.center.z, m_FieldBounds.max.z); // forward backward
 
 			//gameObject.transform.localPosition = m_LaunchPosition;
 			shoot (m_LaunchPosition);
