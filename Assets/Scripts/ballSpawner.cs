@@ -30,11 +30,8 @@ public class ballSpawner : MonoBehaviour {
 	
 	void shoot()
 	{
-		GameObject projectile = (GameObject)Instantiate(m_Ball, 
-		                                                m_LaunchPosition.position, 
-		                                                m_LaunchPosition.rotation);
+		Instantiate(m_Ball, m_LaunchPosition.position, m_LaunchPosition.rotation);
 		//Rigidbody projectileBody = projectile.rigidbody;
 		//projectileBody.AddForce (m_HorizontalForce, m_VerticalForce, m_ForwardForce, ForceMode.Impulse);
 	}
-
 }
