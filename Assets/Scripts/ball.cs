@@ -13,7 +13,7 @@ public class ball : MonoBehaviour {
 		kickForce.x = Random.Range (-100, 100);
 		kickForce.y = Random.Range ( 100, 400);
 		kickForce.z = Random.Range ( 400, 600);
-		print (kickForce);
+		//print (kickForce);
 
 		//rigidbody.AddForce (0, 0, 150);
 		rigidbody.AddForce (kickForce);
@@ -34,12 +34,12 @@ public class ball : MonoBehaviour {
 		{
 			//TODO: have a splash screen for winning
 			//Application.LoadLevel ("WaterJumperOver");
-			print ("YOU SCORED");
+			//print ("YOU SCORED");
 		}
 	}
 
 	void OnDisable()
 	{
-		print("BALL DESTROYED");
+		//print("BALL DESTROYED");
 	}
 }

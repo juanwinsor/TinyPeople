@@ -492,7 +492,8 @@ Transform:
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: -.216817334, y: -1.59045184, z: .0380439758}
   m_LocalScale: {x: .491234511, y: .170919538, z: .284589529}
-  m_Children: []
+  m_Children:
+  - {fileID: 1928925523}
   m_Father: {fileID: 742450813}
 --- !u!65 &329887938
 BoxCollider:
@@ -873,6 +874,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1.65899801}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &1928925522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1928925523}
+  - 114: {fileID: 1928925524}
+  m_Layer: 0
+  m_Name: BallTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1928925523
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928925522}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 9.70129776, y: .480264783, z: 9.09595776}
+  m_LocalScale: {x: 2.3132813, y: 3.99299097, z: 6.64852858}
+  m_Children: []
+  m_Father: {fileID: 329887937}
+--- !u!114 &1928925524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928925522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e556b67b4bcf2c3448ef36e086956361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2145195924
 GameObject:
   m_ObjectHideFlags: 0
