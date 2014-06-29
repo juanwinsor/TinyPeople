@@ -34,12 +34,12 @@ public class ball : MonoBehaviour {
 		{
 			//TODO: have a splash screen for winning
 			//Application.LoadLevel ("WaterJumperOver");
-			Debug.Log ("YOU SCORED");
+			print ("YOU SCORED");
 		}
 	}
 
 	void OnDisable()
 	{
-		Debug.Log ("BALL DESTROYED");
+		print("BALL DESTROYED");
 	}
 }
