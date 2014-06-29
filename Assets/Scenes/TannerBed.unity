@@ -931,10 +931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb085016e0f48984b81ef23a918b0df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Ball: {fileID: 100000, guid: 7b45ccb440d89c840a653af51a43bfd3, type: 2}
-  m_Target: {fileID: 0}
-  m_LaunchPosition: {x: 0, y: 0, z: 0}
   m_ShootTimer: 0
+  m_LaunchPosition: {x: 0, y: 0, z: 0}
+  m_Ball: {fileID: 100000, guid: 7b45ccb440d89c840a653af51a43bfd3, type: 2}
+  m_Target: {fileID: 1928925522}
 --- !u!4 &2145195926
 Transform:
   m_ObjectHideFlags: 0

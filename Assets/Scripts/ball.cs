@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ball : MonoBehaviour {
 	
-	private Vector3 targetForBall; // used to set direction
+	//private Vector3 targetForBall; // used to set direction
 	private Vector3 kickForce; // apply force
 	
 	// Use this for initialization
@@ -23,8 +23,6 @@ public class ball : MonoBehaviour {
 		if (collider.gameObject.tag == "net") 
 		{
 			//TODO: have a splash screen for winning
-			//Application.LoadLevel ("WaterJumperOver");
-			//print ("YOU SCORED");
 		}
 	}
 
@@ -33,15 +31,12 @@ public class ball : MonoBehaviour {
 		//print("BALL DESTROYED");
 	}
 
-	public void SetTarget(Vector3 theTarget)
+	public void Kick()
 	{
-		// Point Ball at Target
-		gameObject.transform.LookAt (theTarget, Vector3.up);
-
 		// Create Random Vars
 		//kickForce.x = Random.Range (-100, 100); // LEFT-RIGHT FORCE
-		kickForce.y = Random.Range ( 300, 400); // FORWARD FORCE
-		//kickForce.z = Random.Range ( 100, 200); // UP FORCE
+		kickForce  = gameObject.transform.forward * Random.Range ( 500, 700); // FORWARD FORCE
+		kickForce.z = Random.Range ( 400, 500); // UP FORCE
 
 		//rigidbody.AddForce (0, 0, 150);
 		rigidbody.AddForce (kickForce);

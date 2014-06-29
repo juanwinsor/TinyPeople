@@ -26,7 +26,7 @@ public class movingTarget : MonoBehaviour {
 		{
 			m_Timer = 0;
 			m_TargetPosition.x = Random.Range(m_NetBounds.min.x, m_NetBounds.max.x);
-			m_TargetPosition.z = Random.Range(m_NetBounds.min.z, m_NetBounds.max.z);
+			m_TargetPosition.z = Random.Range(m_NetBounds.min.z + 5, m_NetBounds.max.z + 5);
 			gameObject.transform.localPosition = m_TargetPosition;
 		}
 	}
