@@ -111,22 +111,6 @@ public class crabController : MonoBehaviour {
 
 		Debug.Log( "velocity: " + velocity );
 
-
-		/*
-		//-- move left
-		if( Input.GetKey( KeyCode.D ) )
-		{
-			setVelocity( 1.0f );
-		}
-		else if( Input.GetKey( KeyCode.A ) )
-		{
-			setVelocity( -1.0f );
-		}
-		else
-		{
-			setVelocity( 0 );
-		}
-		*/
 	}
 
 	void setVelocity( float velocity )
