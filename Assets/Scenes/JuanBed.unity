@@ -162,6 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06907394c1b1026478fefc5313ffc490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastExclusionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  jumped: 0
+  isOnGround: 1
 --- !u!1001 &47264394
 Prefab:
   m_ObjectHideFlags: 0
@@ -530,6 +535,7 @@ GameObject:
   - 114: {fileID: 335495208}
   - 212: {fileID: 335495207}
   - 95: {fileID: 335495206}
+  - 135: {fileID: 335495209}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Untagged
@@ -607,6 +613,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06907394c1b1026478fefc5313ffc490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastExclusionMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  jumped: 0
+  isOnGround: 1
+--- !u!135 &335495209
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335495204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.70000005
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!1 &416362613
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +954,7 @@ GameObject:
   - 23: {fileID: 684762696}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1100,9 +1123,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 836209620}
   - 54: {fileID: 836209621}
-  - 143: {fileID: 836209622}
-  - 136: {fileID: 836209623}
-  m_Layer: 0
+  - 136: {fileID: 836209622}
+  - 114: {fileID: 836209623}
+  m_Layer: 13
   m_Name: CrabParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1139,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 836209619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.7839179, z: 0}
+  m_LocalPosition: {x: 0, y: 10.7332287, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 335495205}
@@ -1136,21 +1159,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!143 &836209622
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 836209619}
-  serializedVersion: 2
-  m_Height: 4
-  m_Radius: .5
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: -2, z: 0}
---- !u!136 &836209623
+--- !u!136 &836209622
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1162,7 +1171,19 @@ CapsuleCollider:
   m_Radius: .5
   m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: -2, z: 0}
+  m_Center: {x: 0, y: -1.5, z: 0}
+--- !u!114 &836209623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836209619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b095c4a3deacb5249adbd507bcac97e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crabObject: {fileID: 335495204}
 --- !u!1 &887500648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2406,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1927522090}
   - 212: {fileID: 1927522091}
+  - 136: {fileID: 1927522092}
   m_Layer: 0
   m_Name: crabForearm
   m_TagString: Untagged
@@ -2429,6 +2451,19 @@ SpriteRenderer:
   m_SortingLayerID: 2887868551
   m_Sprite: {fileID: 21300000, guid: 6c775d25769585542a301e0d40c98438, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!136 &1927522092
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1927522089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .800000012
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: -1.29999995, y: -.300000012, z: 0}
 --- !u!1 &1931550888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,6 +2524,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2113235703}
   - 212: {fileID: 2113235704}
+  - 136: {fileID: 2113235705}
   m_Layer: 0
   m_Name: crabForearm
   m_TagString: Untagged
@@ -2533,6 +2569,19 @@ SpriteRenderer:
   m_SortingLayerID: 2887868551
   m_Sprite: {fileID: 21300000, guid: 6c775d25769585542a301e0d40c98438, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!136 &2113235705
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2113235702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .800000012
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: -1.29999995, y: -.300000012, z: 0}
 --- !u!1001 &2117446675
 Prefab:
   m_ObjectHideFlags: 0
@@ -2567,6 +2616,10 @@ Prefab:
     - target: {fileID: 400000, guid: ed41e2bc4a02ec6429d90e7bfed05035, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: ed41e2bc4a02ec6429d90e7bfed05035, type: 2}
+      propertyPath: raycastExclusionMask.m_Bits
+      value: 8192
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed41e2bc4a02ec6429d90e7bfed05035, type: 2}

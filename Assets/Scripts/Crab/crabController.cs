@@ -3,6 +3,8 @@ using System.Collections;
 
 public class crabController : MonoBehaviour {
 
+	public LayerMask raycastExclusionMask;
+
 	GameObject parentObject;
 
 	private Animator animator;
@@ -21,6 +23,12 @@ public class crabController : MonoBehaviour {
 
 	const int constantVelocity = 3;
 
+	public bool jumped = false;
+	bool isFalling = false;
+	public bool isOnGround = true;
+
+
+	float airVelocityX = 0;
 
 
 	// Use this for initialization
@@ -101,10 +109,9 @@ public class crabController : MonoBehaviour {
 
 
 		//-- calculate the left key velocity
-		float leftVelocity = velocityAccumulatorLeft * -0.5f;
-
+		float leftVelocity = velocityAccumulatorLeft * -1.0f;
 		//-- calculate the right key velocity
-		float rightVelocity = velocityAccumulatorRight * 0.5f;
+		float rightVelocity = velocityAccumulatorRight * 1.0f;
 
 		//-- calculate the net velocity the player is inputting
 		velocity = leftVelocity + rightVelocity;
@@ -113,29 +120,67 @@ public class crabController : MonoBehaviour {
 		setVelocity( velocity );
 
 
-		parentObject.rigidbody.velocity = new Vector3( velocity, 0, 0 );
-		parentObject.rigidbody.AddForce( velocity, 0, 0, ForceMode.VelocityChange );
-
-		 
+		//-- update the velocity only if ont he ground
+		if( isOnGround )
+		{
+			Vector3 oldVelocity = parentObject.rigidbody.velocity;
+			oldVelocity.x = velocity;
+			parentObject.rigidbody.velocity = oldVelocity;
+		}		 
 		Debug.Log( "velocity: " + velocity );
 
 
 		//-- check if jump button was pressed
-		if( Input.GetKeyDown( KeyCode.Space ) )
+		if( Input.GetKeyDown( KeyCode.Space ) && isOnGround )
 		{
-			parentObject.rigidbody.AddForce( 0, 100.0f, 0, ForceMode.Force );
+
+
+			if( Input.GetKey( KeyCode.D ) )
+			{
+				if( animator )
+				{
+					animator.SetTrigger( "rightPressed" );
+				}
+			}
+			else if( Input.GetKey( KeyCode.A ) )
+			{
+				if( animator )
+				{
+					animator.SetTrigger( "leftPressed" );
+				}
+			}
+
+			//-- if the up key is pressed then flag it
+			if( Input.GetKey( KeyCode.W ) )
+			{
+				if( animator )
+				{
+					animator.SetTrigger( "upPressed" );
+				}
+			}
+
+			//airVelocityX = velocity;
+			isOnGround = false;
+			jumped = true;
+			parentObject.rigidbody.AddForce( 0, 500.0f, 0, ForceMode.Force );
 			setJump();
-		}
+		}						
 
 
-		//-- check if crab is on ground again after jump
-		if( Physics.Raycast (transform.position, Vector3.down, 1.0f , -1 ) )
-		//if( GetComponent<CharacterController>().isGrounded )
+		/*
+		//-- check if the player is falling by check if he has jumped and the velocity is downward
+		if( jumped && transform.parent.rigidbody.velocity.y < 0 )
 		{
-			setJumpFinished();
+			isFalling = true;
 		}
-						
+		*/
 
+		/*
+		if( animator )
+		{
+			animator.Update( Time.deltaTime );
+		}
+		*/
 	}
 
 	void setVelocity( float velocity )
@@ -154,11 +199,18 @@ public class crabController : MonoBehaviour {
 		}
 	}
 
-	void setJumpFinished()
+	public void setJumpFinished()
 	{
-		if( animator )
+		if( isOnGround == false )
 		{
-			animator.SetTrigger( "jumpFinished" );
+			isOnGround = true;
+			jumped = false;
+			isFalling = false;
+			
+			if( animator )
+			{
+				animator.SetTrigger( "jumpFinished" );
+			}
 		}
 	}
 }
