@@ -63,3 +63,7 @@ TagManager:
     userID: 1
     uniqueID: 2887868551
     locked: 0
+  - name: Fade
+    userID: 6
+    uniqueID: 1922973623
+    locked: 0
