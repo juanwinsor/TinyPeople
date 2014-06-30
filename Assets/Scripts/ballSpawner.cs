@@ -28,7 +28,7 @@ public class ballSpawner : MonoBehaviour {
 	{
 		m_ShootTimer ++;
 		
-		if (m_ShootTimer > 30) 
+		if (m_ShootTimer > 120) 
 		{
 			m_ShootTimer = 0;
 			m_LaunchPosition.x = Random.Range(m_FieldBounds.min.x, m_FieldBounds.max.x); // left right

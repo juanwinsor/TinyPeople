@@ -35,7 +35,7 @@ public class ball : MonoBehaviour {
 	{
 		// Create Random Vars
 		//kickForce.x = Random.Range (-100, 100); // LEFT-RIGHT FORCE
-		kickForce  = gameObject.transform.forward * Random.Range ( 500, 700); // FORWARD FORCE
+		kickForce  = gameObject.transform.forward * Random.Range ( 200, 300); // FORWARD FORCE
 		kickForce.z = Random.Range ( 400, 500); // UP FORCE
 
 		//rigidbody.AddForce (0, 0, 150);

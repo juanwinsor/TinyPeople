@@ -31,6 +31,12 @@ public class crabController : MonoBehaviour {
 	float airVelocityX = 0;
 
 
+	bool leftPressed = false;
+	bool rightPressed = false;
+	bool upPressed = false;
+	bool upJumpPressed = false;
+	bool jumpPressed = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -38,10 +44,22 @@ public class crabController : MonoBehaviour {
 
 		parentObject = transform.parent.gameObject;
 	}
-	
+
+	void FixedUpdate()
+	{
+
+	}
+
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+	{
+		//-- reset the upheld state
+		if( animator )
+		{
+			animator.SetBool( "upHeld", false );
+		}
+
+
 		//-- left key down
 		if( Input.GetKeyDown( KeyCode.A ) )
 		{
@@ -58,7 +76,7 @@ public class crabController : MonoBehaviour {
 		if( Input.GetKeyUp( KeyCode.A ) )
 		{
 			keyPressTimerPreviousLeft = keyPressTimerCurrentLeft;
-
+			
 		}
 		keyPressTimerCurrentLeft = Time.time;
 		if( (keyPressTimerCurrentLeft - keyPressTimerPreviousLeft) > keyPressTimerInterval )
@@ -73,8 +91,8 @@ public class crabController : MonoBehaviour {
 			}
 			
 		}
-
-
+		
+		
 		//-- right key down
 		if( Input.GetKeyDown( KeyCode.D ) )
 		{
@@ -105,21 +123,21 @@ public class crabController : MonoBehaviour {
 				velocityAccumulatorRight = 0;
 			}
 		}
-
-
-
+		
+		
+		
 		//-- calculate the left key velocity
 		float leftVelocity = velocityAccumulatorLeft * -1.0f;
 		//-- calculate the right key velocity
 		float rightVelocity = velocityAccumulatorRight * 1.0f;
-
+		
 		//-- calculate the net velocity the player is inputting
 		velocity = leftVelocity + rightVelocity;
-
+		
 		//-- set the velocity for the animation states
 		setVelocity( velocity );
-
-
+		
+		
 		//-- update the velocity only if ont he ground
 		if( isOnGround )
 		{
@@ -128,59 +146,82 @@ public class crabController : MonoBehaviour {
 			parentObject.rigidbody.velocity = oldVelocity;
 		}		 
 		Debug.Log( "velocity: " + velocity );
+		
+
+		if( Input.GetKey( KeyCode.W ) )
+		{
+			upPressed = true;
+		}
 
 
 		//-- check if jump button was pressed
 		if( Input.GetKeyDown( KeyCode.Space ) && isOnGround )
 		{
-
-
+			jumpPressed = true;
+			
 			if( Input.GetKey( KeyCode.D ) )
 			{
-				if( animator )
-				{
-					animator.SetTrigger( "rightPressed" );
-				}
+				rightPressed = true;
 			}
 			else if( Input.GetKey( KeyCode.A ) )
 			{
-				if( animator )
-				{
-					animator.SetTrigger( "leftPressed" );
-				}
+				leftPressed = true;
 			}
-
 			//-- if the up key is pressed then flag it
 			if( Input.GetKey( KeyCode.W ) )
 			{
-				if( animator )
-				{
-					animator.SetTrigger( "upPressed" );
-				}
+				upJumpPressed = true;
 			}
-
+		
 			//airVelocityX = velocity;
 			isOnGround = false;
 			jumped = true;
-			parentObject.rigidbody.AddForce( 0, 500.0f, 0, ForceMode.Force );
+			parentObject.rigidbody.AddForce( 0, 200.0f, 0, ForceMode.Force );
 			setJump();
-		}						
-
-
-		/*
-		//-- check if the player is falling by check if he has jumped and the velocity is downward
-		if( jumped && transform.parent.rigidbody.velocity.y < 0 )
-		{
-			isFalling = true;
 		}
-		*/
 
-		/*
+		//-- process the claw animation states
+		processAnimationStates();
+	}
+
+	void processAnimationStates()
+	{
+
 		if( animator )
 		{
-			animator.Update( Time.deltaTime );
+			//-- check for up right
+			if( !leftPressed && rightPressed && upJumpPressed && jumpPressed )
+			{
+				animator.SetTrigger( "upRightPressed" );
+			}
+			//-- check for up left
+			else if( leftPressed && !rightPressed && upJumpPressed && jumpPressed )
+			{
+				animator.SetTrigger( "upLeftPressed" );
+			}
+			//-- check for left
+			else if( leftPressed && !rightPressed && jumpPressed && !upPressed )
+			{
+				animator.SetTrigger( "leftPressed" );
+			}
+			//-- check for right
+			else if( !leftPressed && rightPressed && jumpPressed && !upPressed )
+			{
+				animator.SetTrigger( "rightPressed" );
+			}
+			//-- check for up
+			else if( upPressed && !upJumpPressed && isOnGround )
+			{
+				//animator.SetBool( "upHeld", true );
+			}
 		}
-		*/
+
+
+		rightPressed = false;
+		leftPressed = false;
+		upPressed = false;
+		jumpPressed = false;
+		upJumpPressed = false;
 	}
 
 	void setVelocity( float velocity )
